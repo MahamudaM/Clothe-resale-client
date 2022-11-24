@@ -1,10 +1,25 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import banarImg from '../../assets/image/homeBanar.jpg'
 import per1 from '../../assets/image/person1.jpg'
 import per2 from '../../assets/image/person2.jpg'
 import per3 from '../../assets/image/person3.jpg'
+import CategoreCard from './CategoreCard/CategoreCard';
 import ReviewCard from './ReviewCard/ReviewCard';
 const Home = () => {
+const [categores,setCategores]=useState([])
+
+
+useEffect(()=>{
+fetch('http://localhost:5000/categore')
+.then(res=>res.json())
+.then(data=>{
+    console.log(data)
+    setCategores(data)
+})
+},[])
+
+
     const reviews =[
         {
             id:1,
@@ -49,6 +64,7 @@ const Home = () => {
             img:per2
         }
     ]
+    
     return (
         <div>
            {/* home banar */}
@@ -62,6 +78,17 @@ const Home = () => {
     </div>
   </div>
 </div>
+{/*clothes  categore section */}
+<div className='my-10'>
+    <h1 className='text-3xl font-bold text-center'>See what Shpockers are saying</h1>
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4  gap-3 my-20 ">
+        {
+            categores?.map((categore)=><Link><CategoreCard categore={categore} key={categore.catID}></CategoreCard>
+                </Link>)
+        }
+
+    </div>
+</div>
 {/* buyer review */}
 <div className='my-10'>
     <h1 className='text-3xl font-bold text-center'>See what Shpockers are saying</h1>
@@ -70,7 +97,6 @@ const Home = () => {
     reviews.map(reviw=><ReviewCard key={reviw.id} reviw={reviw}></ReviewCard>)
 }
     </div>
-
 </div>
         </div>
     );
