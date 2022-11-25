@@ -83,7 +83,7 @@ fetch('http://localhost:5000/categore')
     <h1 className='text-3xl font-bold text-center'>See what Shpockers are saying</h1>
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4  gap-3 my-20 ">
         {
-            categores?.map((categore)=><Link><CategoreCard categore={categore} key={categore.catID}></CategoreCard>
+            categores?.map((categore)=><Link to={`/categore/${categore.catID}`}><CategoreCard categore={categore} key={categore.catID}></CategoreCard>
                 </Link>)
         }
 
