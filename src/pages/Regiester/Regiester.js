@@ -1,3 +1,4 @@
+import { GoogleAuthProvider } from 'firebase/auth';
 import React, { useContext, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
@@ -7,7 +8,8 @@ import { AuthContext } from '../../Contexte/AutheProvider';
 const Regiester = () => {
     const {register,handleSubmit,formState: { errors } }=useForm();
     const [erro,setErro]=useState()
-const {userRegister}=useContext(AuthContext)
+const {userRegister,googleSignIn}=useContext(AuthContext)
+
 const registerHandler =data=>{
     setErro('')
     console.log(data)
@@ -15,6 +17,7 @@ const email = data.email;
 const password = data.password;
 const name = data.name;
 const role = data.userRole
+// create user
     userRegister(email,password)
     .then(result=>{
         console.log(result)
@@ -25,6 +28,16 @@ const role = data.userRole
         setErro(errors)
     })
 
+}
+// sign in withe goole 
+const provider = new GoogleAuthProvider()
+const googleHandler =()=>{
+    googleSignIn(provider)
+    .then(result=>{
+        const user = result.user;
+        console.log(user)
+    })
+    .catch(err=>console.log(err))
 }
 
     return (
@@ -72,7 +85,7 @@ const role = data.userRole
 
 <div className="divider">OR</div>
       <div className=" mt-6">      
-      <button className="btn btn-outline  w-full ">sing up with google </button>
+      <button onClick={googleHandler} className="btn btn-outline  w-full ">sing up with google </button>
       </div>
      <div>
      {

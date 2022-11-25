@@ -51,14 +51,6 @@ const [loginEror,setLoginEror] = useState()
       <input className=" bg-primary input input-bordered w-full  text-white" value="Log in" type="submit" />
       </div>
 <small className='mt-3'> Don't have an account? <Link to='/regiester'className='text-primary'>Sign up</Link></small>
-
-<div className="divider">OR</div>
-      <div className=" mt-6">      
-      <button className="btn btn-outline  w-full ">login with google </button>
-      </div>
-     <div>
-     
-     </div>
     </form>
 
             </div>
