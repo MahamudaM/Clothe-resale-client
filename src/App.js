@@ -5,7 +5,7 @@ import './App.css';
 import { routes } from './Routes/Route/Route';
 function App() {
   return (
-    <div className="App">
+    <div >
     <RouterProvider router={routes}></RouterProvider>
     <Toaster></Toaster>
     </div>

@@ -79,8 +79,8 @@ fetch('http://localhost:5000/categore')
   </div>
 </div>
 {/*clothes  categore section */}
-<div className='my-10'>
-    <h1 className='text-3xl font-bold text-center'>See what Shpockers are saying</h1>
+<div className='my-10 max-w-6xl mx-auto'>
+    <h1 className='text-3xl font-bold text-center'>Oure category products</h1>
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4  gap-3 my-20 ">
         {
             categores?.map((categore)=><Link to={`/categore/${categore.catID}`}><CategoreCard categore={categore} key={categore.catID}></CategoreCard>
@@ -90,7 +90,7 @@ fetch('http://localhost:5000/categore')
     </div>
 </div>
 {/* buyer review */}
-<div className='my-10'>
+<div className='my-10 max-w-6xl mx-auto'>
     <h1 className='text-3xl font-bold text-center'>See what Shpockers are saying</h1>
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3  gap-3 my-20 ">
 {

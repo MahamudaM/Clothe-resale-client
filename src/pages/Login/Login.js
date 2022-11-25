@@ -10,6 +10,7 @@ const [loginEror,setLoginEror] = useState()
 
     // login handler
     const loginHandler=data=>{
+        setLoginEror('')
         console.log(data)
         const email = data.email;
         const password = data.password;
