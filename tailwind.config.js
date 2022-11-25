@@ -7,7 +7,7 @@ module.exports = {
     themes:[
       {
         usedClothe:{
-          primary: "#f64c72",    
+          primary: "#730039",    
      secondary: "#19D3AE",
      success: "#36D399",
     accent: "#3A4256",

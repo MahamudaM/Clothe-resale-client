@@ -1,5 +1,6 @@
 import React, { useContext, useState } from 'react';
 import { useForm } from 'react-hook-form';
+import toast from 'react-hot-toast';
 import { Link } from 'react-router-dom';
 import { AuthContext } from '../../Contexte/AutheProvider';
 
@@ -8,13 +9,16 @@ const Regiester = () => {
     const [erro,setErro]=useState()
 const {userRegister}=useContext(AuthContext)
 const registerHandler =data=>{
+    setErro('')
     console.log(data)
 const email = data.email;
 const password = data.password;
 const name = data.name;
+const role = data.userRole
     userRegister(email,password)
     .then(result=>{
         console.log(result)
+        toast.success('successfully register user')
     })
     .catch(error=>{
         const errors = error.message;
@@ -36,7 +40,15 @@ const name = data.name;
   <input type="text" {...register("name",{required:'Name is required'})} placeholder="Name" className="input input-bordered w-full " />
   {errors.name && <p role="alert">{errors.name?.message}</p>}
 </div>   
-    
+<div className="form-control ">
+  <label className="label">
+    <span className="label-text">choose account option</span>   
+  </label>
+  <select {...register("userRole")}   className="select select-bordered w-full max-w-xs">  
+  <option value='seller' selected>seller</option>
+  <option value='user' selected>user</option>
+</select>
+</div>   
    
 <div className="form-control">
   <label className="label">
@@ -52,7 +64,7 @@ const name = data.name;
   <input type="password" {...register("password",{required:'password required',minLength:{value:8,message:'password must be 8 charecter'},pattern:{value:/(?=^.{6,}$)(?=.*[0-9])(?=.*[A-Z])(?=.*[a-z]).*/,message:'password must have number, uppercase and lowercase'}})} placeholder="password" className="input input-bordered w-full " />
   {errors.password && <p className="text-primary">{errors.password?.message}</p>}
 </div>
-<p className='mt-2'>forget password?</p>
+
       <div className="form-control mt-6">
       <input className=" bg-primary input input-bordered w-full  text-white" value="Sing up" type="submit" />
       </div>
