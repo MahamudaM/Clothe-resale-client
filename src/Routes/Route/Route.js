@@ -2,10 +2,16 @@ import { createBrowserRouter } from "react-router-dom";
 import DashboardLayout from "../../Layouts/DashboardLayout";
 import Main from "../../Layouts/Main";
 import CategoreClothe from "../../pages/CategoreClothe/CategoreClothe/CategoreClothe";
-import CategoreCard from "../../pages/Home/CategoreCard/CategoreCard";
+import AddProduct from "../../pages/Dashboard/AddProduct/AddProduct";
+import AllBuyers from "../../pages/Dashboard/AllBuyers/AllBuyers";
+import AllSellers from "../../pages/Dashboard/AllSellers/AllSellers";
+import MyOrders from "../../pages/Dashboard/MyOrders/MyOrders";
+import MyProduct from "../../pages/Dashboard/MyProduct/MyProduct";
+
 import Home from "../../pages/Home/Home";
 import Login from "../../pages/Login/Login";
 import Regiester from "../../pages/Regiester/Regiester";
+import PrivateRoute from '../PrivateRoute/PrivateRoute'
 
 export const routes = createBrowserRouter([
     {
@@ -29,7 +35,7 @@ export const routes = createBrowserRouter([
               },
               {
                 path:'/categore/:id',
-                element:<CategoreClothe></CategoreClothe>,
+                element:<PrivateRoute><CategoreClothe></CategoreClothe></PrivateRoute>,
                 loader:({params})=>fetch(`http://localhost:5000/categore/${params.id}`)          
                 
               },
@@ -37,7 +43,30 @@ export const routes = createBrowserRouter([
     },
     {
       path:'/dashboard',
-      element:<DashboardLayout></DashboardLayout>
+      element:<PrivateRoute><DashboardLayout></DashboardLayout></PrivateRoute>,
+      children:[
+       {
+        path:'/dashboard/myOrder',
+        element:<MyOrders></MyOrders>,
+       },
+       {
+        path:'/dashboard/addProduct',
+        element:<AddProduct></AddProduct>,
+       },
+       {
+        path:'/dashboard/myProduct',
+        element:<MyProduct></MyProduct>,
+       },
+       {
+        path:'/dashboard/allSeller',
+        element:<AllSellers></AllSellers>,
+       },
+       {
+        path:'/dashboard/allBuyer',
+        element:<AllBuyers></AllBuyers>,
+       }
+       
+      ]
       
     },
 ])

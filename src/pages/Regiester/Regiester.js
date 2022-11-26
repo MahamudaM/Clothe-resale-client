@@ -2,13 +2,15 @@ import { GoogleAuthProvider } from 'firebase/auth';
 import React, { useContext, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../Contexte/AutheProvider';
 
 const Regiester = () => {
     const {register,handleSubmit,formState: { errors } }=useForm();
     const [erro,setErro]=useState()
-const {userRegister,googleSignIn}=useContext(AuthContext)
+const {userRegister,googleSignIn,updateUser}=useContext(AuthContext)
+const navigate = useNavigate()
+
 
 const registerHandler =data=>{
     setErro('')
@@ -16,12 +18,19 @@ const registerHandler =data=>{
 const email = data.email;
 const password = data.password;
 const name = data.name;
-const role = data.userRole
+const userRole = data.userRole
 // create user
     userRegister(email,password)
     .then(result=>{
         console.log(result)
         toast.success('successfully register user')
+        const userInfo = {displayName:data.name}
+        updateUser(userInfo)
+        .then(()=>{
+          navigate('/')
+          saveUser(email,name,userRole)
+        })
+        .catch(err=>console.log(err))
     })
     .catch(error=>{
         const errors = error.message;
@@ -38,6 +47,21 @@ const googleHandler =()=>{
         console.log(user)
     })
     .catch(err=>console.log(err))
+}
+// send user info in mongodb
+const saveUser = (email,name,userRole)=>{
+  const user = {email,name,userRole}
+  fetch(`http://localhost:5000/allusers`,{
+    method:'POST',
+    headers:{
+      'content-type':'application/json'
+    },
+    body:JSON.stringify(user)
+  })
+  .then(res=>res.json())
+  .then(data=>{
+    console.log(data)
+  })
 }
 
     return (

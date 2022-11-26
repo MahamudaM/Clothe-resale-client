@@ -1,12 +1,15 @@
 import React, { useContext, useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { Link } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../Contexte/AutheProvider';
 
 const Login = () => {
     const {register,handleSubmit,formState: { errors } }=useForm();
 const {login}=useContext(AuthContext)
 const [loginEror,setLoginEror] = useState()
+const navigate = useNavigate()
+const location = useLocation()
+const from = location.state?.from?.pathname || '/'
 
     // login handler
     const loginHandler=data=>{
@@ -17,6 +20,7 @@ const [loginEror,setLoginEror] = useState()
         login(email,password)
         .then(result=>{
             console.log(result)
+            navigate(from,{replace:true})
         })
         .catch(err=>{
             const error = err.message;
@@ -41,7 +45,7 @@ const [loginEror,setLoginEror] = useState()
     <span className="label-text">password</span>   
   </label>
   <input type="password" {...register("password",{required:'password required',minLength:{value:8,message:'password must be 8 charecter'},pattern:{value:/(?=^.{6,}$)(?=.*[0-9])(?=.*[A-Z])(?=.*[a-z]).*/,message:'password must have number, uppercase and lowercase'}})} placeholder="password" className="input input-bordered w-full " />
-  {errors.password && <p className="text-primary">{errors.password?.message}</p>}
+  {/* {errors.password && <p className="text-primary">{errors.password?.message}</p>} */}
 </div>
 {
     loginEror && <p>{loginEror}</p>

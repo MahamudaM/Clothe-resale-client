@@ -1,7 +1,7 @@
 import React from 'react';
 
-const ClotheCard = ({clothe}) => {
-    console.log(clothe)
+const ClotheCard = ({clothe,setClotheInfo}) => {
+    // console.log(clothe)
     const {img,name,location,resalePrice,originalPrice,useYears,postTime,sellerName}=clothe
     return (
         <div>
@@ -14,10 +14,11 @@ const ClotheCard = ({clothe}) => {
     <p>useYears {useYears}</p>
     <p>post Time {postTime}</p>
     <div className="card-actions justify-end">
-        <p>origina lPrice :{originalPrice}</p>
+        <p>origina lPrice :{originalPrice}$</p>
        
         <p>resale price:{resalePrice}$</p>
-      <button className="btn btn-primary">Book Now</button>
+        <label onClick={()=>setClotheInfo(clothe)}  htmlFor="booking-modal" className="btn btn-primary">Book Now</label>
+      
     </div>
   </div>
 </div>
