@@ -82,8 +82,8 @@ const saveUser = (email,name,userRole)=>{
     <span className="label-text">choose account option</span>   
   </label>
   <select {...register("userRole")}   className="select select-bordered w-full max-w-xs">  
-  <option value='seller' selected>seller</option>
-  <option value='user' selected>user</option>
+  <option value='seller' >seller</option>
+  <option value='user' >user</option>
 </select>
 </div>   
    
