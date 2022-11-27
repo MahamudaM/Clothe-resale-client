@@ -31,6 +31,9 @@ const AddProductCard = ({myCloth,i}) => {
       <th>
         <button className="btn btn-ghost btn-xs">unsold</button>
       </th>
+      <th>
+        <button className="btn btn-ghost btn-xs">advertise</button>
+      </th>
     </tr>
     );
 };

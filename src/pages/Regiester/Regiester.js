@@ -45,6 +45,7 @@ const googleHandler =()=>{
     .then(result=>{
         const user = result.user;
         console.log(user)
+        navigate('/')
     })
     .catch(err=>console.log(err))
 }
@@ -83,7 +84,7 @@ const saveUser = (email,name,userRole)=>{
   </label>
   <select {...register("userRole")}   className="select select-bordered w-full max-w-xs">  
   <option value='seller' >seller</option>
-  <option value='user' >user</option>
+  <option value='user' selected>user</option>
 </select>
 </div>   
    

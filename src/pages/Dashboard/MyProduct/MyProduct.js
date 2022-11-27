@@ -38,6 +38,7 @@ if(isLoading){
         <th>price</th>
         <th>delete</th>
         <th>sales status</th>
+        <th>advertise</th>
       </tr>
     </thead>
     <tbody>
