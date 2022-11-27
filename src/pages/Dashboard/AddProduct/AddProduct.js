@@ -45,7 +45,7 @@ fetch(url,{
     console.log(data.email)
     const product = {
 catagoreID:data.categoreId,
-sellerEmail:data.email,
+sellerEmail:user.email,
 img:imgData.data.url,
 name:data.productname,
 location:data.location,

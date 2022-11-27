@@ -47,6 +47,7 @@ const from = location.state?.from?.pathname || '/'
   <input type="password" {...register("password",{required:'password required',minLength:{value:8,message:'password must be 8 charecter'},pattern:{value:/(?=^.{6,}$)(?=.*[0-9])(?=.*[A-Z])(?=.*[a-z]).*/,message:'password must have number, uppercase and lowercase'}})} placeholder="password" className="input input-bordered w-full " />
   {/* {errors.password && <p className="text-primary">{errors.password?.message}</p>} */}
 </div>
+
 {
     loginEror && <p>{loginEror}</p>
 }

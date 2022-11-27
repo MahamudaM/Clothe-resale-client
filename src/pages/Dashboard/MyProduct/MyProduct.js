@@ -7,7 +7,7 @@ const MyProduct = () => {
 
 
     const {user}=useContext(AuthContext)
-   
+   console.log(user.email)
     const {data:sellerclothe=[],isLoading}=useQuery({  
         queryKey:['sellerclothe',user?.email],
         queryFn:async()=>{
@@ -20,7 +20,7 @@ const MyProduct = () => {
 if(isLoading){
     return <p>loadin.....</p>
 }
-console.log( sellerclothe)
+
 
     return (
         <div>
@@ -32,20 +32,18 @@ console.log( sellerclothe)
     <thead>
       <tr>
         <th>
-          <label>
-            <input type="checkbox" className="checkbox" />
-          </label>
+          
         </th>
         <th>Name</th>
-        <th>Job</th>
+        <th>price</th>
+        <th>delete</th>
         <th>sales status</th>
-        <th></th>
       </tr>
     </thead>
     <tbody>
       {/* <!-- row 1 --> */}
       {
-        sellerclothe?.map(myCloth=><AddProductCard myCloth={myCloth} key={myCloth._id}></AddProductCard>)
+        sellerclothe?.map((myCloth,i)=><AddProductCard myCloth={myCloth} key={myCloth._id} i={i}></AddProductCard>)
       }
    
     </tbody>
