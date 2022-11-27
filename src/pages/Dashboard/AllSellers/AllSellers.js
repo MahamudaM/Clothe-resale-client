@@ -1,12 +1,16 @@
 import { useQuery } from '@tanstack/react-query';
-import React from 'react';
-import AllSelerCard from './AllSelerCard/AllSelerCard';
+import React, { useState } from 'react';
+import toast from 'react-hot-toast';
 
+import DeleteInfoModal from '../DeleteInfoModal/DeleteInfoModal'
 
 const AllSellers = () => {
 
-    
-    const {data:sellers=[],isLoading}=useQuery({  
+    const [deleteSeller,setDeleteSeller]=useState(null)
+    const closeSellerModal=()=>{
+      setDeleteSeller(null);
+    }
+    const {data:sellers=[],isLoading,refetch}=useQuery({  
         queryKey:['sellerclothe'],
         queryFn:async()=>{
        
@@ -20,6 +24,20 @@ if(isLoading){
     return <p>loadin.....</p>
 }
 console.log( sellers)
+// delete seller
+const sellerDeleteHandl=seller=>{
+  fetch(`http://localhost:5000/seller/${seller._id}`,{
+    method:'DELETE'
+  })
+  .then(res=>res.json())
+  .then(data=>{
+    console.log(data)
+    if(data.deletedCount>0){
+      toast.success('successfully delete')
+      refetch()
+    }
+  })
+}
 
     return (
         <div>
@@ -43,14 +61,48 @@ console.log( sellers)
     <tbody>
       {/* <!-- row 1 --> */}
       {
-        sellers?.map((seller,i)=><AllSelerCard seller={seller} key={seller._id} i={i}></AllSelerCard>)
+        sellers?.map((seller,i)=><tr 
+        key={seller._id} 
+        seller={seller}
+        >
+        <th>
+          <label>
+            {i+1}
+          </label>
+        </th>
+       
+        <td>
+       {seller.name}          
+        </td>
+        <td>
+       {seller.userRole}          
+        </td>
+        <td>
+       {seller.email}          
+        </td>
+
+        <td><label onClick={()=>setDeleteSeller(seller)} htmlFor="delete-modal" className="btn btn-ghost btn-xs">delete</label></td>
+        
+        <th>
+          <button className="btn btn-ghost btn-xs">verify</button>
+        </th>
+      </tr>)
       }
    
-    </tbody>
-   
+    </tbody>  
     
   </table>
 </div>
+{
+  deleteSeller && <DeleteInfoModal
+  title = {`are you sure to delete ${deleteSeller.name}`}
+message ={`if you delete ${deleteSeller.name},it can not undone`}
+closeSellerModal={closeSellerModal}
+btnName = {'Delete'}
+deleteHandler= {sellerDeleteHandl}
+sellerData = {deleteSeller}
+  ></DeleteInfoModal>
+}
         </div>
     );
 };
