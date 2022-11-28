@@ -5,7 +5,7 @@ import toast from 'react-hot-toast';
 import DeleteInfoModal from '../DeleteInfoModal/DeleteInfoModal'
 
 const AllSellers = () => {
-
+const [verifiySeller,setVerifiySeller] = useState(false)
     const [deleteSeller,setDeleteSeller]=useState(null)
     const closeSellerModal=()=>{
       setDeleteSeller(null);
@@ -37,6 +37,16 @@ const sellerDeleteHandl=seller=>{
       refetch()
     }
   })
+}
+
+// verifiy handler
+const verifiyHandler=seller=>{
+  fetch(`http://localhost:5000/seller/${seller.email}`)
+  .then(res=>res.json())
+  .then(data=>{
+    console.log(data)   
+  }) 
+
 }
 
     return (
@@ -84,7 +94,7 @@ const sellerDeleteHandl=seller=>{
         <td><label onClick={()=>setDeleteSeller(seller)} htmlFor="delete-modal" className="btn btn-ghost btn-xs">delete</label></td>
         
         <th>
-          <button className="btn btn-ghost btn-xs">verify</button>
+          <button onClick={()=>verifiyHandler(seller)} className="btn btn-ghost btn-xs">verify</button>
         </th>
       </tr>)
       }

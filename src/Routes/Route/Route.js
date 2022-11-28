@@ -13,6 +13,7 @@ import ReportedItems from "../../pages/Dashboard/ReportedItems/ReportedItems";
 import Home from "../../pages/Home/Home";
 import Login from "../../pages/Login/Login";
 import Regiester from "../../pages/Regiester/Regiester";
+import AdminRoute from "../AdminRoute/AdminRoute";
 import PrivateRoute from '../PrivateRoute/PrivateRoute'
 
 export const routes = createBrowserRouter([
@@ -67,15 +68,15 @@ export const routes = createBrowserRouter([
        },
        {
         path:'/dashboard/allSeller',
-        element:<AllSellers></AllSellers>,
+        element:<AdminRoute><AllSellers></AllSellers></AdminRoute>,
        },
        {
         path:'/dashboard/allBuyer',
-        element:<AllBuyers></AllBuyers>,
+        element:<AdminRoute><AllBuyers></AllBuyers></AdminRoute>,
        },
        {
         path:'/dashboard/ReportedItems',
-        element:<ReportedItems></ReportedItems>,
+        element:<AdminRoute><ReportedItems></ReportedItems></AdminRoute>,
        }
        
       ]

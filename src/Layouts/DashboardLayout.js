@@ -1,8 +1,12 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Link, Outlet } from 'react-router-dom';
+import { AuthContext } from '../Contexte/AutheProvider';
+import useAdmin from '../Hooks/useAdmin';
 import Hader from '../SharePages/Hader/Hader';
 
 const DashboardLayout = () => {
+  const {user}=useContext(AuthContext)
+  const [admin]=useAdmin(user.email)
     return (
         <div>
             <Hader></Hader>
@@ -20,9 +24,15 @@ const DashboardLayout = () => {
       <li><Link to='/dashboard/myOrder'>My Orders</Link></li>
       <li><Link to='/dashboard/addProduct'>Add Product</Link></li>
       <li><Link to='/dashboard/myProduct'>My Product</Link></li>
-      <li><Link to='/dashboard/allSeller'>All Sellers</Link></li>
+      
+      {
+        admin &&
+        <>
+<li><Link to='/dashboard/allSeller'>All Sellers</Link></li>
       <li><Link to='/dashboard/allBuyer'>All Buyers</Link></li>
       <li><Link to='/dashboard/ReportedItems'>Reported Items</Link></li>
+        </>
+      }
     </ul>
   
   </div>

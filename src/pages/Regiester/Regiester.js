@@ -4,7 +4,7 @@ import { useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
 import { Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../Contexte/AutheProvider';
-import { ArrowLeftIcon, BeakerIcon } from '@heroicons/react/24/solid'
+import { ArrowLeftIcon } from '@heroicons/react/24/solid'
 const Regiester = () => {
     const {register,handleSubmit,formState: { errors } }=useForm();
     const [erro,setErro]=useState()
@@ -44,6 +44,11 @@ const googleHandler =()=>{
     googleSignIn(provider)
     .then(result=>{
         const user = result.user;
+       
+       const email=user.email;
+       const name = user.displayName;
+       const userRole ="user";
+        saveUser(email,name,userRole);
         console.log(user)
         navigate('/')
     })

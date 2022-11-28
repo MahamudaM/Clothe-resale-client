@@ -1,10 +1,27 @@
-import React from 'react';
+
+import React, { useEffect, useState } from 'react';
 import toast from 'react-hot-toast';
-
+import {  CheckIcon } from '@heroicons/react/24/solid'
 const ClotheCard = ({clothe,setClotheInfo}) => {
-    // console.log(clothe)
+  const [sellerverify,setSellerverify]=useState(null)
+   
     const {img,name,location,resalePrice,originalPrice,useYears,postTime,sellerName}=clothe
+  
 
+useEffect(()=>{
+  fetch(`http://localhost:5000/seller/${clothe?.sellerEmail}`)
+  .then(res=>res.json())
+  .then(data=>{
+    console.log(data)
+    setSellerverify(data)
+  })
+},[clothe?.sellerEmail])
+
+
+
+
+
+console.log(clothe)
     // reported handler
     const reportedHandler=clothe=>{
         console.log(clothe)
@@ -36,6 +53,8 @@ const ClotheCard = ({clothe,setClotheInfo}) => {
       }    
   })  
       }
+      // verify seller
+
 
     return (
         <div>
@@ -43,7 +62,10 @@ const ClotheCard = ({clothe,setClotheInfo}) => {
   <figure><img src={img} alt="Shoes" /></figure>
   <div className="card-body">
     <h2 className="card-title">{name}</h2>
-    <p className='text-xl font-semibold'>seller : {sellerName}</p>
+    <p className='text-xl font-semibold'>
+    {
+        sellerverify?.sellerEmail? <CheckIcon className="h-6 w-6 text-blue-500"/>:""
+      } seller : {sellerName}</p>
     <p>location: {location}</p>
     <p>useYears {useYears}</p>
     <p>post Time {postTime}</p>
