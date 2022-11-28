@@ -4,7 +4,7 @@ import { useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
 import { Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../Contexte/AutheProvider';
-
+import { ArrowLeftIcon, BeakerIcon } from '@heroicons/react/24/solid'
 const Regiester = () => {
     const {register,handleSubmit,formState: { errors } }=useForm();
     const [erro,setErro]=useState()
@@ -110,7 +110,7 @@ const saveUser = (email,name,userRole)=>{
 
 <div className="divider">OR</div>
       <div className=" mt-6">      
-      <button onClick={googleHandler} className="btn btn-outline  w-full ">sing up with google </button>
+      <button onClick={googleHandler} className="btn btn-outline  w-full ">  <ArrowLeftIcon className="h-6 w-6 text-blue-500"/>sing up with google </button>
       </div>
      <div>
      {

@@ -1,10 +1,9 @@
 import React from 'react';
 
-const DeleteInfoModal = ({title,message,closeSellerModal,btnName,deleteHandler,sellerData}) => {
+const BuyerDeleteModal = ({title,message,closeSellerModal,btnName,deleteHandler,sellerData}) => {
     return (
-      <div>   
-
-<input type="checkbox" id="delete-modal" className="modal-toggle" />
+        <div>
+            <input type="checkbox" id="delete-modal" className="modal-toggle" />
 <div className="modal">
   <div className="modal-box relative">
     <label htmlFor="delete-modal" className="btn btn-sm btn-circle absolute right-2 top-2">✕</label>
@@ -16,8 +15,8 @@ const DeleteInfoModal = ({title,message,closeSellerModal,btnName,deleteHandler,s
     </div>
   </div>
 </div>
-      </div>
+        </div>
     );
 };
 
-export default DeleteInfoModal;
+export default BuyerDeleteModal;

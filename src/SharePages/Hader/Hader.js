@@ -12,7 +12,8 @@ const logOutHandler =()=>{
   .catch(err=>console.log(err))
 }
     const menuItem = <>
-    <li><Link to ='/'>home</Link></li>    
+    <li><Link to ='/'>home</Link></li> 
+    <li><Link to ='/bloge'>bloge</Link></li>   
     <li><Link to ='/regiester'>Sing up</Link></li>
    {
     user?.uid? 
