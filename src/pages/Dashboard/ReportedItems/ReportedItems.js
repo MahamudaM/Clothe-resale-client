@@ -11,7 +11,7 @@ const ReportedItems = () => {
     const {data:reportedItems=[],isLoading,refetch}=useQuery({  
       queryKey:['reportedClothe'],
       queryFn:async()=>{
-          const res = await fetch(`http://localhost:5000/reported`)
+          const res = await fetch(`https://y-five-cyan.vercel.app/reported`)
           const data = await res.json();
           return data;
         }
@@ -22,7 +22,7 @@ if(isLoading){
 }
 
 const reporItemDeleteHandl=item=>{
-    fetch(`http://localhost:5000/clothe/reportedClothe/${item._id}`,{
+    fetch(`https://y-five-cyan.vercel.app/clothe/reportedClothe/${item._id}`,{
       method:'DELETE'
     })
     .then(res=>res.json())

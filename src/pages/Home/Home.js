@@ -15,7 +15,7 @@ const [categores,setCategores]=useState([])
 
 
 useEffect(()=>{
-axios.get('http://localhost:5000/categore')
+axios.get('https://y-five-cyan.vercel.app/categore')
 .then(data=>{
     console.log(data.data)
 const categoreProds = data.data
@@ -28,8 +28,9 @@ const {data:advertesProds=[],isLoading}=useQuery({
     queryKey:['advertised'],
     queryFn:async()=>{
    
-      const res = await fetch(`http://localhost:5000/advertised?adv=adv`)
+      const res = await fetch(`https://y-five-cyan.vercel.app/advertised?adv=adv`)
       const data = await res.json();
+      console.log(data)
       return data;
     }
     
@@ -37,7 +38,7 @@ const {data:advertesProds=[],isLoading}=useQuery({
 if(isLoading){
 return <button className="btn loading">loading</button>
 }
-console.log(advertesProds)
+// console.log(advertesProds)
 
     const reviews =[
         {

@@ -19,7 +19,7 @@ const AddProduct = () => {
 const {data:categorey=[],isLoading}=useQuery({  
   queryKey:['categore'],
   queryFn:async()=>{
-    const res = await fetch(`http://localhost:5000/categore`)
+    const res = await fetch(`https://y-five-cyan.vercel.app/categore`)
     const data = await res.json();
     return data;
   }
@@ -58,7 +58,7 @@ condition:data.productCondi,
 
     }
     // insert new product inside database
-    fetch(`http://localhost:5000/clothe`,{
+    fetch(`https://y-five-cyan.vercel.app/clothe`,{
       method:"POST",
       headers:{
         'content-type':'application/json'

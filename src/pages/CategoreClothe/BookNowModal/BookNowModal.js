@@ -22,7 +22,7 @@ phone,
 img
 }
 console.log(bookingInfo)
-fetch(`http://localhost:5000/booking`,{
+fetch(`https://y-five-cyan.vercel.app/booking`,{
   method:'POST',
   headers:{
     'content-type':'application/json'

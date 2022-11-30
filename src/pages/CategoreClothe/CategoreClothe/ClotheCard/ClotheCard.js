@@ -14,7 +14,7 @@ const ClotheCard = ({clothe,setClotheInfo}) => {
 //   queryKey:['seller'],
 //   queryFn:async()=>{
  
-//     const res = await fetch(`http://localhost:5000/seller/${sellerEmail}`)
+//     const res = await fetch(`https://y-five-cyan.vercel.app/seller/${sellerEmail}`)
 //     const data = await res.json();
 //     return data;
 //   }
@@ -23,9 +23,9 @@ const ClotheCard = ({clothe,setClotheInfo}) => {
 
 
 
-// http://localhost:5000/seller/varify?ver=true
+// https://y-five-cyan.vercel.app/seller/varify?ver=true
 useEffect(()=>{
-  fetch(`http://localhost:5000/seller/${sellerEmail}`)
+  fetch(`https://y-five-cyan.vercel.app/seller/${sellerEmail}`)
   .then(res=>res.json())
   .then(data=>{  
     setSellerverify(data)
@@ -41,7 +41,7 @@ console.log(sellerverify)
     // reported handler
     const reportedHandler=id=>{
         
-        fetch(`http://localhost:5000/clothe/reportedClothe/${id}`,{
+        fetch(`https://y-five-cyan.vercel.app/clothe/reportedClothe/${id}`,{
   method:'PUT'
 })
 .then(res=>res.json())

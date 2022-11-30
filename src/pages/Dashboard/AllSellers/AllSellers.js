@@ -15,7 +15,7 @@ const [verifiySeller,setVerifiySeller] = useState(false)
         queryKey:['sellerclothe'],
         queryFn:async()=>{
        
-          const res = await fetch(`http://localhost:5000/seller?userRole=seller`)
+          const res = await fetch(`https://y-five-cyan.vercel.app/seller?userRole=seller`)
           const data = await res.json();
           return data;
         }
@@ -27,7 +27,7 @@ if(isLoading){
 
 // delete seller
 const sellerDeleteHandl=seller=>{
-  fetch(`http://localhost:5000/seller/${seller._id}`,{
+  fetch(`https://y-five-cyan.vercel.app/seller/${seller._id}`,{
     method:'DELETE'
   })
   .then(res=>res.json())
@@ -43,7 +43,7 @@ const sellerDeleteHandl=seller=>{
 // verifiy handler
 const verifiyHandler=(email)=>{
   
-  fetch(`http://localhost:5000/seller/${email}`,{
+  fetch(`https://y-five-cyan.vercel.app/seller/${email}`,{
   method:'PUT'  
 })
 .then(res=>res.json())

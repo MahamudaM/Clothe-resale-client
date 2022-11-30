@@ -44,7 +44,7 @@ export const routes = createBrowserRouter([
               {
                 path:'/categore/:id',
                 element:<PrivateRoute><CategoreClothe></CategoreClothe></PrivateRoute>,
-                loader:({params})=>fetch(`http://localhost:5000/categore/${params.id}`)          
+                loader:({params})=>fetch(`https://y-five-cyan.vercel.app/categore/${params.id}`)          
                 
               },
               {
@@ -67,7 +67,7 @@ export const routes = createBrowserRouter([
        {
         path:'/dashboard/payment/:id',
         element:<UserRoute><Payment></Payment></UserRoute>,
-        loader:({params})=>fetch(`http://localhost:5000/booking/${params.id}`)
+        loader:({params})=>fetch(`https://y-five-cyan.vercel.app/booking/${params.id}`)
        },
        {
         path:'/dashboard/addProduct',

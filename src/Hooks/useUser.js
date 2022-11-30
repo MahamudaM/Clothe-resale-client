@@ -4,7 +4,7 @@ const useUser=email=>{
     const [userCheck,setUserCheck]=useState(false);
     const [userCheckLoading,setUserCheckLoading] = useState(true)
     useEffect(()=>{
-        fetch(`http://localhost:5000/alluser/user/${email}`)
+        fetch(`https://y-five-cyan.vercel.app/alluser/user/${email}`)
         .then(res=>res.json())
         .then(data=>{
             console.log(data)

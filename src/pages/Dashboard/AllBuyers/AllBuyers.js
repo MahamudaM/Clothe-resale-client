@@ -14,7 +14,7 @@ const AllBuyers = () => {
         queryKey:['sellerclothe'],
         queryFn:async()=>{
        
-          const res = await fetch(`http://localhost:5000/users?userRole=user`)
+          const res = await fetch(`https://y-five-cyan.vercel.app/users?userRole=user`)
           const data = await res.json();
           return data;
         }
@@ -27,7 +27,7 @@ if(isLoading){
 
 // delete users
 const buyerDeleteHandl=user=>{
-  fetch(`http://localhost:5000/users/${user._id}`,{
+  fetch(`https://y-five-cyan.vercel.app/users/${user._id}`,{
     method:'DELETE'
   })
   .then(res=>res.json())

@@ -16,7 +16,7 @@ const MyProduct = () => {
     const {data:sellerclothe=[],isLoading,refetch}=useQuery({  
         queryKey:['sellerclothe',user?.email],
         queryFn:async()=>{
-          const res = await fetch(`http://localhost:5000/sellerclothe?email=${user?.email}`)
+          const res = await fetch(`https://y-five-cyan.vercel.app/sellerclothe?email=${user?.email}`)
           const data = await res.json();
           return data;
         }
@@ -28,7 +28,7 @@ if(isLoading){
 }
 // delete product
 const sellerProdDeleteHandl=myCloth=>{
-  fetch(`http://localhost:5000/sellerclothe/${myCloth._id}`,{
+  fetch(`https://y-five-cyan.vercel.app/sellerclothe/${myCloth._id}`,{
     method:'DELETE'
   })
   .then(res=>res.json())
@@ -43,8 +43,8 @@ const sellerProdDeleteHandl=myCloth=>{
 
 // adverties porduct\
 const advertisHandler=(id)=>{
-  
-  fetch(`http://localhost:5000/advertised/${id}`,{
+  console.log(id)
+  fetch(`https://y-five-cyan.vercel.app/advertised/${id}`,{
   method:'PUT'  
 })
 .then(res=>res.json())
@@ -119,7 +119,7 @@ const advertisHandler=(id)=>{
         </th>
         <th>
         {
-          myCloth?.paid? "": <button onClick={()=>advertisHandler(myCloth._id)} className="btn btn-ghost btn-xs">advertise</button>
+          myCloth?.paid? " ": <button onClick={()=>advertisHandler(myCloth._id)} className="btn btn-ghost btn-xs">advertise</button>
         }
           
         </th>

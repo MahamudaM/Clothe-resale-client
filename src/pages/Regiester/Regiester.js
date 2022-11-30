@@ -57,7 +57,7 @@ const googleHandler =()=>{
 // send user info in mongodb
 const saveUser = (email,name,userRole)=>{
   const user = {email,name,userRole}
-  fetch(`http://localhost:5000/allusers`,{
+  fetch(`https://y-five-cyan.vercel.app/allusers`,{
     method:'POST',
     headers:{
       'content-type':'application/json'

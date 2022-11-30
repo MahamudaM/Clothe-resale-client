@@ -4,7 +4,7 @@ const useAdmin=email=>{
     const [admin,setadmin]=useState(false);
     const [adminLoading,setAdminLoading] = useState(true)
     useEffect(()=>{
-        fetch(`http://localhost:5000/alluser/admin/${email}`)
+        fetch(`https://y-five-cyan.vercel.app/alluser/admin/${email}`)
         .then(res=>res.json())
         .then(data=>{
             console.log(data)
