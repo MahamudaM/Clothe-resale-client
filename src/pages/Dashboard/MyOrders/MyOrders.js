@@ -1,5 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 import React, { useContext } from 'react';
+import { Link } from 'react-router-dom';
 import { AuthContext } from '../../../Contexte/AutheProvider';
 import MyOrderCard from './MyOrderCard';
 
@@ -16,7 +17,7 @@ const MyOrders = () => {
         
       })
 if(isLoading){
-    return <p>loadin.....</p>
+    return <button className="btn loading">loading</button>
 }
 
 console.log( MyOrders)
@@ -35,14 +36,51 @@ console.log( MyOrders)
         <th>title</th>
         <th>Email</th>
         <th>price</th>
-        <th>pay button</th>
+        <th>
+        pay button
+        </th>
       </tr>
     </thead>
     <tbody>
       {/* <!-- row 1 --> */}
       
       {
-    MyOrders?.map((myOrde,i)=><MyOrderCard myOrde={myOrde} key={myOrde._id} i={i}></MyOrderCard>)
+    MyOrders?.map((myOrde,i)=>
+    <tr myOrde={myOrde} key={myOrde._id}>
+    <th>
+      <label>
+        {i+1}
+      </label>
+    </th>
+    <td>
+      <div className="flex items-center space-x-3">
+        <div className="avatar">
+          <div className="mask mask-squircle w-12 h-12">
+            <img src={myOrde.img} alt="Avatar Tailwind CSS Component" />
+          </div>
+        </div>
+        <div>
+          <div className="font-bold">{myOrde.productName}</div>
+          <div className="text-sm opacity-50">United States</div>
+        </div>
+      </div>
+    </td>
+    <td>
+    {myOrde.email}
+     
+    </td>
+    <td>{myOrde.price}$</td>
+    <th>
+      {
+        myOrde.price && !myOrde.paid &&  <Link to={`/dashboard/payment/${myOrde._id}`}><button className="btn btn-primary btn-xs">pay</button></Link>
+      }
+      {
+        myOrde.price && myOrde.paid &&  <span className="text-green-500">paid</span>
+      }
+     
+    </th>
+  </tr>
+    )
   }
       
      

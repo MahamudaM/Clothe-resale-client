@@ -10,6 +10,7 @@ const [verifiySeller,setVerifiySeller] = useState(false)
     const closeSellerModal=()=>{
       setDeleteSeller(null);
     }
+    // loade seller
     const {data:sellers=[],isLoading,refetch}=useQuery({  
         queryKey:['sellerclothe'],
         queryFn:async()=>{
@@ -21,9 +22,9 @@ const [verifiySeller,setVerifiySeller] = useState(false)
         
       })
 if(isLoading){
-    return <p>loadin.....</p>
+    return <button className="btn loading">loading</button>
 }
-console.log( sellers)
+
 // delete seller
 const sellerDeleteHandl=seller=>{
   fetch(`http://localhost:5000/seller/${seller._id}`,{
@@ -40,14 +41,25 @@ const sellerDeleteHandl=seller=>{
 }
 
 // verifiy handler
-const verifiyHandler=seller=>{
-  fetch(`http://localhost:5000/seller/${seller.email}`)
-  .then(res=>res.json())
-  .then(data=>{
-    console.log(data)   
-  }) 
+const verifiyHandler=(email)=>{
+  
+  fetch(`http://localhost:5000/seller/${email}`,{
+  method:'PUT'  
+})
+.then(res=>res.json())
+.then(data=>{
+  console.log(data)
+  
+  if(data.acknowledged===true){
+    toast.success('verify user')
+    refetch()
+  }
+ 
+})
 
 }
+
+
 
     return (
         <div>
@@ -94,7 +106,14 @@ const verifiyHandler=seller=>{
         <td><label onClick={()=>setDeleteSeller(seller)} htmlFor="delete-modal" className="btn btn-ghost btn-xs">delete</label></td>
         
         <th>
-          <button onClick={()=>verifiyHandler(seller)} className="btn btn-ghost btn-xs">verify</button>
+         
+            {
+              seller?.ver==='true'? 'verified':
+              <button onClick={()=>verifiyHandler(seller.email)} className="btn btn-ghost btn-xs">verify</button>
+            }
+            
+          
+         
         </th>
       </tr>)
       }

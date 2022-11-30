@@ -21,9 +21,9 @@ const AllBuyers = () => {
         
       })
 if(isLoading){
-    return <p>loadin.....</p>
+    return <button className="btn loading">loading</button>
 }
-console.log(users)
+
 
 // delete users
 const buyerDeleteHandl=user=>{

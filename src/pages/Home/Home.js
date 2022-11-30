@@ -1,24 +1,43 @@
+import { useQuery } from '@tanstack/react-query';
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import banarImg from '../../assets/image/homeBanar.jpg'
 import per1 from '../../assets/image/person1.jpg'
 import per2 from '../../assets/image/person2.jpg'
 import per3 from '../../assets/image/person3.jpg'
+import AdvertesProdCard from './advertesProdCard/advertesProdCard';
 import CategoreCard from './CategoreCard/CategoreCard';
 import ReviewCard from './ReviewCard/ReviewCard';
+import axios from 'axios';
+
 const Home = () => {
 const [categores,setCategores]=useState([])
 
 
 useEffect(()=>{
-fetch('http://localhost:5000/categore')
-.then(res=>res.json())
+axios.get('http://localhost:5000/categore')
 .then(data=>{
-    console.log(data)
-    setCategores(data)
+    console.log(data.data)
+const categoreProds = data.data
+    setCategores(categoreProds)
 })
 },[])
 
+// advertised product
+const {data:advertesProds=[],isLoading}=useQuery({  
+    queryKey:['advertised'],
+    queryFn:async()=>{
+   
+      const res = await fetch(`http://localhost:5000/advertised?adv=adv`)
+      const data = await res.json();
+      return data;
+    }
+    
+  })
+if(isLoading){
+return <button className="btn loading">loading</button>
+}
+console.log(advertesProds)
 
     const reviews =[
         {
@@ -89,6 +108,33 @@ fetch('http://localhost:5000/categore')
 
     </div>
 </div>
+{/* advertesProds section */}
+<div>
+
+{
+    advertesProds?.length>0? 
+
+    <div>
+        <h1 className='text-3xl font-bold text-center'>Oure Adverties products</h1>
+<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3  gap-3 my-20 ">
+       {
+         advertesProds?.map(product=><AdvertesProdCard
+            key={product.id} 
+            product={product}
+            
+        ></AdvertesProdCard>)
+       }
+       </div>
+    </div>
+        
+    :''
+}
+
+
+</div>
+
+
+
 {/* buyer review */}
 <div className='my-10 max-w-6xl mx-auto'>
     <h1 className='text-3xl font-bold text-center'>See what Shpockers are saying</h1>

@@ -8,18 +8,23 @@ import AllBuyers from "../../pages/Dashboard/AllBuyers/AllBuyers";
 import AllSellers from "../../pages/Dashboard/AllSellers/AllSellers";
 import MyOrders from "../../pages/Dashboard/MyOrders/MyOrders";
 import MyProduct from "../../pages/Dashboard/MyProduct/MyProduct";
+import Payment from "../../pages/Dashboard/Payment/Payment";
 import ReportedItems from "../../pages/Dashboard/ReportedItems/ReportedItems";
+import ErrorPage from "../../pages/ErrorPage/ErrorPage";
 
 import Home from "../../pages/Home/Home";
 import Login from "../../pages/Login/Login";
 import Regiester from "../../pages/Regiester/Regiester";
 import AdminRoute from "../AdminRoute/AdminRoute";
 import PrivateRoute from '../PrivateRoute/PrivateRoute'
+import SellerRoute from "../SellerRoute/SellerRoute";
+import UserRoute from "../UserRoute/UserRoute";
 
 export const routes = createBrowserRouter([
     {
         path:'/',
         element:<Main></Main>,
+        errorElement:<ErrorPage></ErrorPage>,
         children:[
             {
               path:'/',
@@ -53,18 +58,24 @@ export const routes = createBrowserRouter([
     {
       path:'/dashboard',
       element:<PrivateRoute><DashboardLayout></DashboardLayout></PrivateRoute>,
+      errorElement:<ErrorPage></ErrorPage>,
       children:[
        {
         path:'/dashboard/myOrder',
-        element:<MyOrders></MyOrders>,
+        element:<UserRoute><MyOrders></MyOrders></UserRoute>,
+       },
+       {
+        path:'/dashboard/payment/:id',
+        element:<UserRoute><Payment></Payment></UserRoute>,
+        loader:({params})=>fetch(`http://localhost:5000/booking/${params.id}`)
        },
        {
         path:'/dashboard/addProduct',
-        element:<AddProduct></AddProduct>,
+        element:<SellerRoute><AddProduct></AddProduct></SellerRoute>,
        },
        {
         path:'/dashboard/myProduct',
-        element:<MyProduct></MyProduct>,
+        element:<SellerRoute><MyProduct></MyProduct></SellerRoute>,
        },
        {
         path:'/dashboard/allSeller',
@@ -82,8 +93,8 @@ export const routes = createBrowserRouter([
       ]
       
     },
-    {
-      path:'*',
-      element:<h1>no route found</h1>
-  }
+  //   {
+  //     path:'*',
+  //     element:<ErrorPage></ErrorPage>
+  // }
 ])

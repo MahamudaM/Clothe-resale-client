@@ -1,20 +1,20 @@
 import React, { useContext } from 'react';
 import { Navigate, useLocation } from 'react-router-dom';
 import { AuthContext } from '../../Contexte/AutheProvider';
-import useAdmin from '../../Hooks/useAdmin';
+import useUser from '../../Hooks/useUser';
 
-const AdminRoute = ({children}) => {
+const UserRoute = ({children}) => {
     const location = useLocation()
     const {user,loader}=useContext(AuthContext)
-    const [admin,adminLoading]=useAdmin(user?.email)
-    if(loader || adminLoading){
+    const [userCheck,userCheckLoading]=useUser(user?.email)
+    if(loader || userCheckLoading){
         return <button className="btn loading">loading</button>
     }
-    if(user && admin){
+    if(user && userCheck){
         return children
     }
 
     return <Navigate to='/login' state={{from:location}} replace></Navigate>
 };
 
-export default AdminRoute;
+export default UserRoute;

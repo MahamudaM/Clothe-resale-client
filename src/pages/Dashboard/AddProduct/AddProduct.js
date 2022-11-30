@@ -76,7 +76,7 @@ condition:data.productCondi,
     console.log(data);
   };
 if(isLoading){
-  return <p>loading....</p>
+  return <button className="btn loading">loading</button>
 }
   return (
     <div>

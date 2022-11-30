@@ -4,7 +4,7 @@ import { useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
 import { Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../Contexte/AutheProvider';
-import { ArrowLeftIcon } from '@heroicons/react/24/solid'
+
 const Regiester = () => {
     const {register,handleSubmit,formState: { errors } }=useForm();
     const [erro,setErro]=useState()
@@ -104,7 +104,7 @@ const saveUser = (email,name,userRole)=>{
   <label className="label">
     <span className="label-text">password</span>   
   </label>
-  <input type="password" {...register("password",{required:'password required',minLength:{value:8,message:'password must be 8 charecter'},pattern:{value:/(?=^.{6,}$)(?=.*[0-9])(?=.*[A-Z])(?=.*[a-z]).*/,message:'password must have number, uppercase and lowercase'}})} placeholder="password" className="input input-bordered w-full " />
+  <input type="password" {...register("password",{required:'password required'})} placeholder="password" className="input input-bordered w-full " />
   {errors.password && <p className="text-primary">{errors.password?.message}</p>}
 </div>
 
@@ -115,7 +115,7 @@ const saveUser = (email,name,userRole)=>{
 
 <div className="divider">OR</div>
       <div className=" mt-6">      
-      <button onClick={googleHandler} className="btn btn-outline  w-full ">  <ArrowLeftIcon className="h-6 w-6 text-blue-500"/>sing up with google </button>
+      <button onClick={googleHandler} className="btn btn-outline  w-full ">  sing up with google </button>
       </div>
      <div>
      {
