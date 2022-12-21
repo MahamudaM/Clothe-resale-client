@@ -110,7 +110,7 @@ return <button className="btn loading">loading</button>
     </div>
 </div>
 {/* advertesProds section */}
-<div>
+<div className='my-10 max-w-6xl mx-auto'>
 
 {
     advertesProds?.length>0? 
